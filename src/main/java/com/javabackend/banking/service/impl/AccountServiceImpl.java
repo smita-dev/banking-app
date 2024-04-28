@@ -18,4 +18,10 @@ public class AccountServiceImpl implements AccountService {
         Account savedAccount=accountRepository.save(account);
         return savedAccount;
     }
+
+    @Override
+    public Account getAccount(long id){
+        Account account=accountRepository.findById(id).orElseThrow(()->new RuntimeException("Account not found"));
+        return account;
+    }
 }
