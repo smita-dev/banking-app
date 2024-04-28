@@ -30,4 +30,15 @@ public class AccountServiceImpl implements AccountService {
         savedAccount.setBalance(totalAmount);
         return savedAccount;
     }
+
+    @Override
+    public Account withdrawAmount(long id,double amount) {
+        Account savedAccount=accountRepository.findById(id).orElseThrow(()->new RuntimeException("Account Not Fund"));
+        if(amount<savedAccount.getBalance()){
+            throw new RuntimeException("Insufficient Amount");
+        }
+        double remainingAmount=savedAccount.getBalance()-amount;
+        savedAccount.setBalance(remainingAmount);
+        return savedAccount;
+    }
 }

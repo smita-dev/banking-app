@@ -6,4 +6,5 @@ public interface AccountService {
     Account createAccount(Account account);
     Account getAccount(long id);
     Account depositAmount(long id, double amount);
+    Account withdrawAmount(long id,double amount);
 }
