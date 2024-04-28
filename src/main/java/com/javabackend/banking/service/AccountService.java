@@ -5,4 +5,5 @@ import com.javabackend.banking.entity.Account;
 public interface AccountService {
     Account createAccount(Account account);
     Account getAccount(long id);
+    Account depositAmount(long id, double amount);
 }

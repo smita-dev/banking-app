@@ -15,13 +15,19 @@ public class AccountServiceImpl implements AccountService {
     }
     @Override
     public Account createAccount(Account account) {
-        Account savedAccount=accountRepository.save(account);
-        return savedAccount;
+        return accountRepository.save(account);
     }
 
     @Override
     public Account getAccount(long id){
-        Account account=accountRepository.findById(id).orElseThrow(()->new RuntimeException("Account not found"));
-        return account;
+        return accountRepository.findById(id).orElseThrow(()->new RuntimeException("Account not found"));
+    }
+
+    @Override
+    public Account depositAmount(long id, double amount) {
+        Account savedAccount=accountRepository.findById(id).orElseThrow(()->new RuntimeException("Account not found"));
+        double totalAmount=savedAccount.getBalance()+amount;
+        savedAccount.setBalance(totalAmount);
+        return savedAccount;
     }
 }
