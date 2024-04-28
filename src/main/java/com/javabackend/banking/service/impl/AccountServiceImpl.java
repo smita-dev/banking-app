@@ -5,6 +5,8 @@ import com.javabackend.banking.repository.AccountRepository;
 import com.javabackend.banking.service.AccountService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AccountServiceImpl implements AccountService {
 
@@ -34,11 +36,18 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account withdrawAmount(long id,double amount) {
         Account savedAccount=accountRepository.findById(id).orElseThrow(()->new RuntimeException("Account Not Fund"));
-        if(amount<savedAccount.getBalance()){
+        if(amount>savedAccount.getBalance()){
             throw new RuntimeException("Insufficient Amount");
         }
         double remainingAmount=savedAccount.getBalance()-amount;
         savedAccount.setBalance(remainingAmount);
         return savedAccount;
     }
+
+    @Override
+    public List<Account> getAllAccount() {
+        return accountRepository.findAll();
+    }
+
+
 }
