@@ -49,5 +49,10 @@ public class AccountServiceImpl implements AccountService {
         return accountRepository.findAll();
     }
 
+    @Override
+    public void deleteAccountById(long id) {
+        accountRepository.deleteById(id);
+    }
+
 
 }

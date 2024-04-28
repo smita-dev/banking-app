@@ -46,4 +46,10 @@ public class AccountController {
         List<Account> allAccounts=service.getAllAccount();
         return ResponseEntity.ok(allAccounts);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletAccount(@PathVariable long id){
+        service.deleteAccountById(id);
+        return ResponseEntity.ok("Account Deleted Successfully");
+    }
 }
